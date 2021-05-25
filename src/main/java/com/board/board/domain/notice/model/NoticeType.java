@@ -1,6 +1,6 @@
 package com.board.board.domain.notice.model;
 
-public enum NoticeBoardType {
+public enum NoticeType {
     NOTICE,
     INFO,
     USEINFO

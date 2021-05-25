@@ -50,7 +50,6 @@ public class Board {
         this.postContent = request.getPostContent();
         this.user = user;
         this.postDate = LocalDateTime.now();
-
     }
 
     public Comment lastComment(Board board) {

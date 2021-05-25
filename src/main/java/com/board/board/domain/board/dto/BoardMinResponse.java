@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 public class BoardMinResponse {
+    private Long id;
     private String postContent;
 
     private String postTitle;
@@ -27,6 +28,7 @@ public class BoardMinResponse {
     private Image lastImage;
 
     public BoardMinResponse(Board board) {
+        this.id = board.getId();
         this.postContent = board.getPostContent();
         this.postTitle = board.getPostTitle();
         this.userName = board.getUser().getUsername();

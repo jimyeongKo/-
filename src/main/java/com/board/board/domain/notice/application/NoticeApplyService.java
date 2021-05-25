@@ -26,24 +26,11 @@ public class NoticeApplyService {
 
     private final NoticeRepository repository;
 
-    public NoticeResponse createNotice(NoticeRequest request, User user, List<MultipartFile> images) {
+    public NoticeResponse createNotice(NoticeRequest request, User user) {
         Notice notice = new Notice(request, user);
 
         repository.save(notice);
 
-        images.forEach(image -> {
-            final String IMAGE_LOCATION = "/post/image" + notice.getId() + "/" + image.getOriginalFilename();
-
-            try {
-                FileUpload.uploadImage(image, IMAGE_LOCATION);
-
-                Image postImage = Image.create(notice, IMAGE_LOCATION);
-
-                notice.addImage(postImage);
-            } catch (Exception e) {
-                throw new FileSaveException(image.getOriginalFilename());
-            }
-        });
         return new NoticeResponse(notice);
     }
 }

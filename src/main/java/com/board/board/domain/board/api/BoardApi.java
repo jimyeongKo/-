@@ -19,7 +19,7 @@ public class BoardApi {
 
     private final BoardService service;
 
-    @DeleteMapping("{boardId}/delete")
+    @DeleteMapping("{boardId}")
     public ApiResponse<BoardResponse> delete(@PathVariable Long boardId) {
         return new ApiResponse<>(HttpStatus.OK, service.deleteBoard(boardId));
     }
