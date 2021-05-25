@@ -40,15 +40,15 @@ public class MarketSearchService {
 
     // 마켓 전체 보기
     public PagingResponse<MarketMinResponse> findAll(int page, MarketStatus status) {
-        // 거래 완료 제외하고 보기 모두보기
-        if (MarketStatus.WAIT == status) {
-            Page<Market> markets = repository.findByStatus(MarketStatus.WAIT, paging(page));
+        if (status == null) {
+            Page<Market> markets = repository.findAll(paging(page));
 
             List<MarketMinResponse> data = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
 
             return new PagingResponse<>(page, markets.getTotalPages(), markets.getTotalElements(), data);
         }
-        Page<Market> markets = repository.findAll(paging(page));
+        // 거래 상태별 보기
+        Page<Market> markets = repository.findByStatus(MarketStatus.WAIT, paging(page));
 
         List<MarketMinResponse> data = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
 
@@ -57,18 +57,18 @@ public class MarketSearchService {
 
     // 마켓 타입별 보기
     public PagingResponse<MarketMinResponse> findType(int page, MarketType type, MarketStatus status) {
-        // 거래 대기중인 것만 보기
-        if (MarketStatus.WAIT == status) {
-            Page<Market> markets = repository.findByStatusAndType(status, type, paging(page));
 
-            List<MarketMinResponse> data = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
+        if (status == null) {
+            Page<Market> markets = repository.findByType(type, paging(page));
+
+            List<MarketMinResponse> data  = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
 
             return new PagingResponse<>(page, markets.getTotalPages(), markets.getTotalElements(), data);
         }
+        // 거래 상태별 보기
+        Page<Market> markets = repository.findByStatusAndType(status, type, paging(page));
 
-        Page<Market> markets = repository.findByType(type, paging(page));
-
-        List<MarketMinResponse> data  = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
+        List<MarketMinResponse> data = markets.getContent().stream().map(MarketMinResponse::new).collect(Collectors.toList());
 
         return new PagingResponse<>(page, markets.getTotalPages(), markets.getTotalElements(), data);
     }
