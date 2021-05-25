@@ -42,12 +42,13 @@ public class Comment {
     private String commentContent;
 
 
-    public static Comment create(CommentRequest dto, Board board, Comment parent){
+    public static Comment create(CommentRequest dto, Board board, User user, Comment parent){
 
         return Comment.builder().commentDate(LocalDateTime.now())
                 .parent(parent)
                 .board(board)
                 .commentContent(dto.getCommentContent())
+                .user(user)
                 .build();
     }
 

@@ -30,10 +30,10 @@ public class Board {
 
     private String postTitle;
 
-    @OneToMany(mappedBy = "POST",orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
     private final List<Image> images = new ArrayList<>();
 
-    @OneToMany(mappedBy = "POST",orphanRemoval = true,cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
     private final List<Comment> comment= new ArrayList<>();
 
     public void addImage(Image image) {

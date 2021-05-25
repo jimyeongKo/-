@@ -11,5 +11,7 @@ import javax.annotation.security.DenyAll;
 @AllArgsConstructor
 public class CommentRequest {
 
+    private Long parent;
+
     private String commentContent;
 }

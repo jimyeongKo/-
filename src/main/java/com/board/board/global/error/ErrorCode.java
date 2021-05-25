@@ -33,7 +33,11 @@ public enum ErrorCode {
     FILE_SAVE_ERROR(400, "R001", "파일 저장에 실패하였습니다."),
 
     //Board
-    BOARD_NOT_FOUND(400, "B001", "해당 게시글을 찾을 수 없습니다.");
+    BOARD_NOT_FOUND(400, "B001", "해당 게시글을 찾을 수 없습니다."),
+
+    //Comment
+    COMMENT_NOT_FOUND(400, "F001", "해당 댓글을 찾을 수 없습니다.")
+
     ;
 
 
