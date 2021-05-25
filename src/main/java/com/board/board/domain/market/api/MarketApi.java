@@ -5,6 +5,7 @@ import com.board.board.domain.market.application.MarketSearchService;
 import com.board.board.domain.market.dto.MarketMinResponse;
 import com.board.board.domain.market.dto.MarketRequest;
 import com.board.board.domain.market.dto.MarketResponse;
+import com.board.board.domain.market.model.MarketStatus;
 import com.board.board.domain.market.model.MarketType;
 import com.board.board.domain.user.domain.User;
 import com.board.board.global.common.response.ApiPagingResponse;
@@ -36,14 +37,16 @@ public class MarketApi {
         return new ApiResponse<>(HttpStatus.OK, applyService.createMarket(request, user, images));
     }
 
-    @GetMapping("all")
-    public ApiPagingResponse<MarketMinResponse> all(@RequestParam int page) {
-        return new ApiPagingResponse<>(HttpStatus.OK, searchService.findAll(page));
+    @GetMapping("/all/{status}")
+    public ApiPagingResponse<MarketMinResponse> all(@RequestParam int page, @PathVariable MarketStatus status) {
+        return new ApiPagingResponse<>(HttpStatus.OK, searchService.findAll(page, status));
     }
 
-    @GetMapping("{type}")
-    public ApiPagingResponse<MarketMinResponse> typeSearch(@RequestParam int page, @PathVariable MarketType type) {
-        return new ApiPagingResponse<>(HttpStatus.OK, searchService.findType(page, type));
+    @GetMapping("{type}/{status}")
+    public ApiPagingResponse<MarketMinResponse> typeSearch(@RequestParam int page
+            , @PathVariable MarketType type
+            , @PathVariable MarketStatus status) {
+        return new ApiPagingResponse<>(HttpStatus.OK, searchService.findType(page, type, status));
     }
 
     @GetMapping("{marketId}")
