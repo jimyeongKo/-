@@ -21,11 +21,17 @@ public class CommentResponse {
 
     private String userName;
 
+    private String boardTitle;
+
+    private String boardContent;
+
 
     public CommentResponse(Comment comment) {
         this.id = comment.getId();
         this.content = comment.getCommentContent();
         this.createTime = comment.getCommentDate();
         this.userName = comment.getUser().getUsername();
+        this.boardTitle = comment.getBoard().getTitle();
+        this.boardContent = comment.getBoard().getContent();
     }
 }

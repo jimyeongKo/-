@@ -26,9 +26,9 @@ public class Board {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
-    private String postContent;
+    private String content;
 
-    private String postTitle;
+    private String title;
 
     @OneToMany(mappedBy = "board",orphanRemoval = true,cascade = CascadeType.ALL)
     private final List<Image> images = new ArrayList<>();
@@ -46,8 +46,8 @@ public class Board {
     }
 
     public Board(BoardRequest request, User user) {
-        this.postTitle = request.getPostTitle();
-        this.postContent = request.getPostContent();
+        this.title = request.getPostTitle();
+        this.content = request.getPostContent();
         this.user = user;
         this.postDate = LocalDateTime.now();
     }
